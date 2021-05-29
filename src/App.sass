@@ -1,7 +1,7 @@
 :root 
     /* Root variables not vegetables */
     --primaryColor: hsl(0, 0%, 90%)
-    --secondaryColor: hsl(0, 0%, 10%)
+    --secondaryColor: hsl(0, 0%, 20%)
     --defaultFontSize: 1.2rem
     --defaultFormItemWidth: 350px
 * 
@@ -12,7 +12,7 @@
 body 
     font-size: var(--defaultFontSize)
     color: var(--secondaryColor)
-    background-color: hsl(0, 0%, 90%)
+    background-color: --primaryColor
 
     /* List notes component */
 section 
@@ -22,7 +22,7 @@ section
     border: 1px solid black
     margin: 15px
     padding: 5px
-
+    color: var(--secondaryColor)
     /* AddNote component */
 form
     margin: 15px

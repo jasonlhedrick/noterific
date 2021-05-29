@@ -10,8 +10,8 @@ function AddNote(props) {
   
     function submitNewNote(e) {
       e.preventDefault();
-      const addNoteForm = document.getElementById('addNoteForm');
-      toggleDisableChildElements(addNoteForm);
+      const addNoteFormFieldset = document.getElementById('addNoteFormFieldset');
+      toggleDisableChildElements(addNoteFormFieldset);
       /* Database functionality. */
       /*
       axios.post(`${serverLoc}/notes/`, { title: noteTitle, body: noteBody })
@@ -25,14 +25,13 @@ function AddNote(props) {
       */
       
       /* For testing functionality without a database. */
-      console.log(appNotes);
       setAppNotes(appNotes => [...appNotes, {title: noteTitle, body: noteBody}]);
-      toggleDisableChildElements(addNoteForm);
+      toggleDisableChildElements(addNoteFormFieldset);
     }
   
     return (
       <form id="addNoteForm" onSubmit={(e) => submitNewNote(e)}>
-        <fieldset>
+        <fieldset id="addNoteFormFieldset">
             <legend>Create a note!</legend>
             <input id="addNoteTitle" required type="text" onChange={(e) => setNoteTitle(e.target.value)} value={noteTitle}></input>
             <textarea id="addNoteBody" required onChange={(e) => setNoteBody(e.target.value)} value={noteBody}></textarea>
