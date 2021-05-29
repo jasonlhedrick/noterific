@@ -1,0 +1,38 @@
+:root 
+    /* Root variables */
+    --primaryColor: hsl(0, 0%, 90%)
+    --secondaryColor: hsl(0, 0%, 10%)
+    --defaultFontSize: 1.2rem
+* 
+    box-sizing: border-box
+    margin: 0
+    padding: 0
+
+body 
+    font-size: var(--defaultFontSize)
+    color: var(--secondaryColor)
+    background-color: hsl(0, 0%, 90%)
+
+section 
+    display: inline-block
+    min-width: 150px
+    height: 150px
+    border: 1px solid black
+    margin: 15px
+    padding: 5px
+
+form
+    display: flex
+    flex-direction: column
+    width: 100%
+    input
+        font-size: var(--defaultFontSize)
+        width: 350px
+    textarea
+        font-size: var(--defaultFontSize)
+        width: 350px
+        height: 400px
+        scroll-behavior: smooth
+    button
+        font-size: var(--defaultFontSize)
+        width: 150px

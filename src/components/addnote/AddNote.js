@@ -32,8 +32,8 @@ function AddNote(props) {
   
     return (
       <form id="addNoteForm" onSubmit={(e) => submitNewNote(e)}>
-        <input type="text" onChange={(e) => setNoteTitle(e.target.value)} value={noteTitle}></input>
-        <textarea onChange={(e) => setNoteBody(e.target.value)} value={noteBody}></textarea>
+        <input required type="text" onChange={(e) => setNoteTitle(e.target.value)} value={noteTitle}></input>
+        <textarea required onChange={(e) => setNoteBody(e.target.value)} value={noteBody}></textarea>
         <button type="submit">Add note</button>
       </form>
     )
