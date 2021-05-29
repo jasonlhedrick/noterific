@@ -1,8 +1,9 @@
 :root {
-  /* Root variables */
+  /* Root variables not vegetables */
   --primaryColor: hsl(0, 0%, 90%);
   --secondaryColor: hsl(0, 0%, 10%);
   --defaultFontSize: 1.2rem;
+  --defaultFormItemWidth: 350px;
 }
 
 * {
@@ -15,6 +16,7 @@ body {
   font-size: var(--defaultFontSize);
   color: var(--secondaryColor);
   background-color: #e6e6e6;
+  /* List notes component */
 }
 
 section {
@@ -24,20 +26,29 @@ section {
   border: 1px solid black;
   margin: 15px;
   padding: 5px;
+  /* AddNote component */
 }
 
 form {
+  margin: 15px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+}
+form fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
 }
 form input {
   font-size: var(--defaultFontSize);
-  width: 350px;
+  width: var(--defaultFormItemWidth);
 }
 form textarea {
   font-size: var(--defaultFontSize);
-  width: 350px;
+  width: var(--defaultFormItemWidth);
   height: 400px;
   scroll-behavior: smooth;
 }

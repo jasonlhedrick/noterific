@@ -32,9 +32,12 @@ function AddNote(props) {
   
     return (
       <form id="addNoteForm" onSubmit={(e) => submitNewNote(e)}>
-        <input required type="text" onChange={(e) => setNoteTitle(e.target.value)} value={noteTitle}></input>
-        <textarea required onChange={(e) => setNoteBody(e.target.value)} value={noteBody}></textarea>
-        <button type="submit">Add note</button>
+        <fieldset>
+            <legend>Create a note!</legend>
+            <input id="addNoteTitle" required type="text" onChange={(e) => setNoteTitle(e.target.value)} value={noteTitle}></input>
+            <textarea id="addNoteBody" required onChange={(e) => setNoteBody(e.target.value)} value={noteBody}></textarea>
+            <button type="submit">Add note</button>
+        </fieldset>
       </form>
     )
   }
