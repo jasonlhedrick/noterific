@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from "react-router-dom";
 
 /* Component imports */
@@ -17,7 +18,7 @@ function App() {
   const [loggedIn, setLogin] = useState([false])
   
   useEffect(() => {
-    // Update component when appNotes changes length.
+    // Update component when appNotes changes length or loggedIn switches.
   }, [appNotes.length, loggedIn])
   
   return (
@@ -25,24 +26,31 @@ function App() {
       <Router>
         <nav className="mainNav" id="mainNav">
           <Link to="/">Home</Link>
-          {loggedIn === true ? 
-          <>
-            <Link to="/listNotes">Note List</Link> 
-            <Link to="/addNote">Add a Note</Link>
-          </>
-          : <>Register - Login</>}
+
+          { loggedIn === true 
+          ? 
+            <>
+              <Link to="/listNotes">Note List</Link> 
+              <Link to="/addNote">Add a Note</Link>
+            </>
+          : 
+            <>
+              Register - Login
+            </>
+          }
+
           <button onClick={() => setLogin(!loggedIn)}>
-            {loggedIn === true ? "Logout" : "Login"}
+            { loggedIn === true ? "Logout" : "Login"}
           </button>
         </nav>
         <Header/>
         <main className="App">
           <Switch>
             <Route path="/addNote">
-              <AddNote setAppNotes={setAppNotes}/>
+              { loggedIn === true ? <AddNote setAppNotes={setAppNotes}/> : <Redirect to="/home" /> }
             </Route>
             <Route path="/listNotes">
-              <ListNotes notes={appNotes}/>
+              { loggedIn === true ? <ListNotes notes={appNotes}/> : <Redirect to="/home" /> }
             </Route>
           </Switch>
         </main>
