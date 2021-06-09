@@ -20,7 +20,7 @@ function App() {
     <>
       <Header/>
       <main className="App">
-        <AddNote appNotes={appNotes} setAppNotes={setAppNotes}/>
+        <AddNote setAppNotes={setAppNotes}/>
         <div id="listNotes">
           {appNotes.map((note, index) => {
             return (

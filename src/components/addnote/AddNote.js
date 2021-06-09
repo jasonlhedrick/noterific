@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import toggleDisableChildElements from '../../helpers/toggleDisableChildElements';
 
 function AddNote(props) {
-    let appNotes = props.appNotes;
     let setAppNotes = props.setAppNotes;
     const [noteTitle, setNoteTitle] = useState('');
     const [noteBody, setNoteBody] = useState('');
