@@ -1,38 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-import { serverLoc } from './constants';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 /* Component imports */
 import AddNote from './components/addnote/AddNote';
+import ListNotes from './components/listnotes/ListNotes';
 
 import './App.css';
 
-
 function App() {
   const [appNotes, setAppNotes] = useState([]);
-  const siteName = 'Noterific!'
+  const [loggedIn, setLogin] = useState([false])
+  
   useEffect(() => {
     // Update component when appNotes changes length.
-  }, [appNotes.length])
-
+  }, [appNotes.length, loggedIn])
+  
   return (
     <>
-      <Header/>
-      <main className="App">
-        <AddNote setAppNotes={setAppNotes}/>
-        <div id="listNotes">
-          {appNotes.map((note, index) => {
-            return (
-              <section key={index}>
-                <h3>{note.title}</h3>
-                <p>{note.body}</p>
-              </section>
-            )
-          })}
-          
-        </div>
-      </main>
+      <Router>
+        <nav className="mainNav" id="mainNav">
+          <Link to="/">Home</Link>
+          {loggedIn === true ? 
+          <>
+            <Link to="/listNotes">Note List</Link> 
+            <Link to="/addNote">Add a Note</Link>
+          </>
+          : <>Register - Login</>}
+          <button onClick={() => setLogin(!loggedIn)}>
+            {loggedIn === true ? "Logout" : "Login"}
+          </button>
+        </nav>
+        <Header/>
+        <main className="App">
+          <Switch>
+            <Route path="/addNote">
+              <AddNote setAppNotes={setAppNotes}/>
+            </Route>
+            <Route path="/listNotes">
+              <ListNotes notes={appNotes}/>
+            </Route>
+          </Switch>
+        </main>
+      </Router>
     </>
   );
 }
