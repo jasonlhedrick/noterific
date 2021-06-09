@@ -47,10 +47,16 @@ function App() {
         <main className="App">
           <Switch>
             <Route path="/addNote">
-              { loggedIn === true ? <AddNote setAppNotes={setAppNotes}/> : <Redirect to="/home" /> }
+              { loggedIn === true ? 
+                <AddNote setAppNotes={setAppNotes}/> 
+                : 
+                <Redirect to="/home" /> }
             </Route>
             <Route path="/listNotes">
-              { loggedIn === true ? <ListNotes notes={appNotes}/> : <Redirect to="/home" /> }
+              { loggedIn === true ? 
+              <ListNotes notes={appNotes}/> 
+              : 
+              <Redirect to="/home" /> }
             </Route>
           </Switch>
         </main>
