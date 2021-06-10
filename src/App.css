@@ -82,6 +82,7 @@ form button {
 .list-note-card {
   width: 33%;
   margin: 3% 0 3% 0;
+  border: 3px solid grey;
 }
 
 /*# sourceMappingURL=App.css.map */

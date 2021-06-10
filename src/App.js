@@ -12,6 +12,8 @@ import { LinkContainer } from 'react-router-bootstrap';
 /* Component imports */
 import AddNote from './components/addnote/AddNote';
 import ListNotes from './components/listnotes/ListNotes';
+import Registration from './components/registration/Registration';
+import Login from './components/login/Login';
 
 import './App.css';
 
@@ -36,11 +38,16 @@ function App() {
             </>
           : 
             <>
-              Register - Login
+              <Link to="/registration">Register</Link> 
+              <Link to="/login">Login</Link>
             </>
           }
 
-          <Button onClick={() => setLogin(!loggedIn)}>
+          <Button onClick={() => {
+              setLogin(!loggedIn)
+              if(!loggedIn) return <Redirect to="/home" />
+            }
+          }>
             { loggedIn === true ? "Logout" : "Login"}
           </Button>
         </nav>
@@ -50,18 +57,26 @@ function App() {
             <Route exact path="/">
                 <Header/>
             </Route>
-            <Route exact path="/addNote">
-              { loggedIn === true ? 
+            { loggedIn === true 
+            ? 
+            <>
+              <Route exact path="/addNote">
                 <AddNote setAppNotes={setAppNotes}/> 
-                : 
-                <Redirect to="/home" /> }
-            </Route>
-            <Route exact path="/listNotes">
-              { loggedIn === true ? 
-              <ListNotes notes={appNotes}/> 
-              : 
-              <Redirect to="/home" /> }
-            </Route>
+              </Route>
+              <Route exact path="/listNotes">
+                <ListNotes notes={appNotes}/> 
+              </Route>
+            </>
+            :
+            <>
+              <Route exact path="/registration">
+                <Registration />
+              </Route>
+              <Route exact path="/login">
+                <Login />
+              </Route>
+            </>
+            }
           </Switch>
         </main>
       </Router>
