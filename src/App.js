@@ -6,8 +6,7 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-import { Button, Container, Navbar, Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 
 /* Component imports */
 import AddNote from './components/addnote/AddNote';
@@ -43,11 +42,7 @@ function App() {
             </>
           }
 
-          <Button onClick={() => {
-              setLogin(!loggedIn)
-              if(!loggedIn) return <Redirect to="/home" />
-            }
-          }>
+          <Button onClick={() => setLogin(!loggedIn)}>
             { loggedIn === true ? "Logout" : "Login"}
           </Button>
         </nav>
@@ -57,26 +52,26 @@ function App() {
             <Route exact path="/">
                 <Header/>
             </Route>
-            { loggedIn === true 
-            ? 
-            <>
-              <Route exact path="/addNote">
+            <Route exact path="/addNote">
+              { loggedIn ?
                 <AddNote setAppNotes={setAppNotes}/> 
-              </Route>
-              <Route exact path="/listNotes">
+                :
+                <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/listNotes">
+              { loggedIn ? 
                 <ListNotes notes={appNotes}/> 
-              </Route>
-            </>
-            :
-            <>
-              <Route exact path="/registration">
-                <Registration />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-            </>
-            }
+                :
+                <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/registration">
+              <Registration />
+            </Route>
+            <Route exact path="/login">
+              <Login />
+            </Route>
           </Switch>
         </main>
       </Router>
