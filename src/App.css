@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Mate+SC&family=Oswald&display=swap");
 :root {
   /* Root variables not vegetables */
   --primaryColor: hsl(0, 0%, 90%);
@@ -13,9 +14,10 @@
 }
 
 body {
-  font-size: var(--defaultFontSize);
+  font-size: 16px;
   color: var(--secondaryColor);
   background-color: var(--primaryColor);
+  font-family: "Oswald", sans-serif;
 }
 
 header {
@@ -46,19 +48,21 @@ form fieldset {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 2% 0 0 2%;
 }
 form input {
   font-size: var(--defaultFontSize);
   width: var(--defaultFormItemWidth);
 }
 form textarea {
+  margin-top: 2%;
   font-size: var(--defaultFontSize);
   width: var(--defaultFormItemWidth);
   height: 400px;
   scroll-behavior: smooth;
 }
 form button {
+  margin-top: 3%;
   font-size: var(--defaultFontSize);
   width: 150px;
 }
@@ -68,6 +72,7 @@ form button {
   margin-bottom: 3%;
   display: flex;
   justify-content: space-around;
+  font-size: var(--defaultFontSize);
 }
 
 /*# sourceMappingURL=App.css.map */

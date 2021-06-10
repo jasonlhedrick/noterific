@@ -6,6 +6,8 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+import { Button, Container, Navbar, Nav } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap';
 
 /* Component imports */
 import AddNote from './components/addnote/AddNote';
@@ -22,11 +24,10 @@ function App() {
   }, [appNotes.length, loggedIn])
   
   return (
-    <>
+    <Container>
       <Router>
         <nav className="mainNav" id="mainNav">
           <Link to="/">Home</Link>
-
           { loggedIn === true 
           ? 
             <>
@@ -39,20 +40,23 @@ function App() {
             </>
           }
 
-          <button onClick={() => setLogin(!loggedIn)}>
+          <Button onClick={() => setLogin(!loggedIn)}>
             { loggedIn === true ? "Logout" : "Login"}
-          </button>
+          </Button>
         </nav>
-        <Header/>
+        
         <main className="App">
           <Switch>
-            <Route path="/addNote">
+            <Route exact path="/">
+                <Header/>
+            </Route>
+            <Route exact path="/addNote">
               { loggedIn === true ? 
                 <AddNote setAppNotes={setAppNotes}/> 
                 : 
                 <Redirect to="/home" /> }
             </Route>
-            <Route path="/listNotes">
+            <Route exact path="/listNotes">
               { loggedIn === true ? 
               <ListNotes notes={appNotes}/> 
               : 
@@ -61,7 +65,7 @@ function App() {
           </Switch>
         </main>
       </Router>
-    </>
+    </Container>
   );
 }
 
