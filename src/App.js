@@ -6,10 +6,13 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
+import { Button, Container } from 'react-bootstrap';
 
 /* Component imports */
 import AddNote from './components/addnote/AddNote';
 import ListNotes from './components/listnotes/ListNotes';
+import Registration from './components/registration/Registration';
+import Login from './components/login/Login';
 
 import './App.css';
 
@@ -22,11 +25,10 @@ function App() {
   }, [appNotes.length, loggedIn])
   
   return (
-    <>
+    <Container>
       <Router>
-        <nav className="mainNav" id="mainNav">
+        <nav className="main-nav" id="mainNav">
           <Link to="/">Home</Link>
-
           { loggedIn === true 
           ? 
             <>
@@ -35,33 +37,45 @@ function App() {
             </>
           : 
             <>
-              Register - Login
+              <Link to="/registration">Register</Link> 
+              <Link to="/login">Login</Link>
             </>
           }
 
-          <button onClick={() => setLogin(!loggedIn)}>
+          <Button onClick={() => setLogin(!loggedIn)}>
             { loggedIn === true ? "Logout" : "Login"}
-          </button>
+          </Button>
         </nav>
-        <Header/>
+        
         <main className="App">
           <Switch>
-            <Route path="/addNote">
-              { loggedIn === true ? 
-                <AddNote setAppNotes={setAppNotes}/> 
-                : 
-                <Redirect to="/home" /> }
+            <Route exact path="/">
+                <Header/>
             </Route>
-            <Route path="/listNotes">
-              { loggedIn === true ? 
-              <ListNotes notes={appNotes}/> 
-              : 
-              <Redirect to="/home" /> }
+            <Route exact path="/addNote">
+              { loggedIn ?
+                <AddNote setAppNotes={setAppNotes}/> 
+                :
+                <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/listNotes">
+              { loggedIn ? 
+                <ListNotes notes={appNotes}/> 
+                :
+                <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/registration">
+              <Registration />
+            </Route>
+            <Route exact path="/login">
+              <Login />
             </Route>
           </Switch>
         </main>
       </Router>
-    </>
+    </Container>
   );
 }
 

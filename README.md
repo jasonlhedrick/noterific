@@ -6,8 +6,8 @@ display a list of notes and edit or delete notes
 # Progress
 # [ ] = TODO, [-] = In process, [X] = MVP
 [-] Router
-[ ] Registration
-[ ] Login
+[-] Registration
+[-] Login
 [-] Add note
 [-] List notes
 [ ] Delete note

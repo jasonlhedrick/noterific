@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from 'react-bootstrap';
 
 import toggleDisableChildElements from '../../helpers/toggleDisableChildElements';
 
@@ -12,16 +13,7 @@ function AddNote(props) {
       const addNoteFormFieldset = document.getElementById('addNoteFormFieldset');
       toggleDisableChildElements(addNoteFormFieldset);
       /* Database functionality. */
-      /*
-      axios.post(`${serverLoc}/notes/`, { title: noteTitle, body: noteBody })
-      .then(res => {
-        console.log(res);
-        toggleChildren(addNoteForm);
-      })
-      .catch(err =>{
-        console.log(err);
-      })
-      */
+      
       
       /* For testing functionality without a database. */
       setAppNotes(appNotes => [...appNotes, {title: noteTitle, body: noteBody}]);
@@ -34,7 +26,7 @@ function AddNote(props) {
             <legend>Create a note!</legend>
             <input id="addNoteTitle" required type="text" onChange={(e) => setNoteTitle(e.target.value)} value={noteTitle}></input>
             <textarea id="addNoteBody" required onChange={(e) => setNoteBody(e.target.value)} value={noteBody}></textarea>
-            <button type="submit">Add note</button>
+            <Button type="submit">Add note</Button>
         </fieldset>
       </form>
     )
