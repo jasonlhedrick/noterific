@@ -26,7 +26,7 @@ function App() {
   return (
     <Container>
       <Router>
-        <nav className="mainNav" id="mainNav">
+        <nav className="main-nav" id="mainNav">
           <Link to="/">Home</Link>
           { loggedIn === true 
           ? 

@@ -7,7 +7,7 @@
   --defaultFormItemWidth: 350px;
 }
 
-* {
+*, ::after, ::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -17,6 +17,10 @@ body {
   font-size: 16px;
   color: var(--secondaryColor);
   background-color: var(--primaryColor);
+  font-family: "Oswald", sans-serif;
+}
+
+#fontoverride {
   font-family: "Oswald", sans-serif;
 }
 
@@ -67,12 +71,17 @@ form button {
   width: 150px;
 }
 
-.mainNav {
+.main-nav {
   margin-top: 3%;
   margin-bottom: 3%;
   display: flex;
   justify-content: space-around;
   font-size: var(--defaultFontSize);
+}
+
+.list-note-card {
+  width: 33%;
+  margin: 3% 0 3% 0;
 }
 
 /*# sourceMappingURL=App.css.map */
