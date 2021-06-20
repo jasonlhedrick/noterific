@@ -18,8 +18,12 @@ import './App.css';
 
 function App() {
   const [appNotes, setAppNotes] = useState([]);
-  const [loggedIn, setLogin] = useState([false])
-  
+  const [loggedIn, setLogin] = useState([false]);
+  const jwt = localStorage.getItem('jwt');
+
+  if (jwt) {
+    setLogin(true);
+  }
   useEffect(() => {
     // Update component when appNotes changes length or loggedIn switches.
   }, [appNotes.length, loggedIn])
@@ -29,11 +33,11 @@ function App() {
       <Router>
         <nav className="main-nav" id="mainNav">
           <Link to="/">Home</Link>
-          { loggedIn === true 
+          { localStorage.getItem('jwt')
           ? 
             <>
-              <Link to="/listNotes">Note List</Link> 
-              <Link to="/addNote">Add a Note</Link>
+              <Link to="/notes">Note List</Link> 
+              <Link to="/notes/add">Add a Note</Link>
             </>
           : 
             <>
@@ -41,10 +45,13 @@ function App() {
               <Link to="/login">Login</Link>
             </>
           }
-
-          <Button onClick={() => setLogin(!loggedIn)}>
-            { loggedIn === true ? "Logout" : "Login"}
-          </Button>
+          { jwt ? 
+            <Button onClick={() => { localStorage.removeItem('jwt'); setLogin(!loggedIn); }}>
+              Logout
+            </Button>
+            :
+            <></>
+          }
         </nav>
         
         <main className="App">
@@ -52,25 +59,33 @@ function App() {
             <Route exact path="/">
                 <Header/>
             </Route>
-            <Route exact path="/addNote">
-              { loggedIn ?
+            <Route exact path="/notes/add">
+              { jwt ?
                 <AddNote setAppNotes={setAppNotes}/> 
                 :
                 <Redirect to="/" />
               }
             </Route>
-            <Route exact path="/listNotes">
-              { loggedIn ? 
+            <Route exact path="/notes">
+              { jwt ? 
                 <ListNotes notes={appNotes}/> 
                 :
                 <Redirect to="/" />
               }
             </Route>
             <Route exact path="/registration">
-              <Registration />
+              { !jwt ?
+                <Registration />
+              :
+                <Redirect to="/listNotes" />
+              }
             </Route>
             <Route exact path="/login">
-              <Login />
+              { !jwt ?
+                <Login />
+              :
+                <Redirect to="/listNotes" />
+              }
             </Route>
           </Switch>
         </main>
