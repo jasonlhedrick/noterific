@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Container } from 'react-bootstrap';
 
 const axios = require('axios');
-const { serverLoc } = require('../../constants');
+const { serverLoc } = require('../constants');
 
 
 function Registration(props) {
@@ -16,6 +16,7 @@ function Registration(props) {
         .then(res => {
             console.log(res);
             localStorage.setItem('jwt', res.data.token);
+            props.toggleLogin();
             return res;
         })
         .catch(err => {

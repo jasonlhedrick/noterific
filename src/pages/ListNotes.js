@@ -4,9 +4,6 @@
 import {
   BrowserRouter as Router,
   Link,
-  Switch,
-  Route,
-  useParams 
 } from "react-router-dom";
 
 import { Card } from 'react-bootstrap';

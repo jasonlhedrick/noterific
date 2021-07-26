@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,10 +9,10 @@ import {
 import { Button, Container } from 'react-bootstrap';
 
 /* Component imports */
-import AddNote from './components/addnote/AddNote';
-import ListNotes from './components/listnotes/ListNotes';
-import Registration from './components/registration/Registration';
-import Login from './components/login/Login';
+import AddNote from './pages/AddNote';
+import ListNotes from './pages/ListNotes';
+import Registration from './pages/Registration';
+import Login from './pages/Login';
 
 import './App.css';
 
@@ -20,14 +20,18 @@ function App() {
   const [appNotes, setAppNotes] = useState([]);
   const [loggedIn, setLogin] = useState([false]);
   const jwt = localStorage.getItem('jwt');
-
-  if (jwt) {
-    setLogin(true);
+  
+  function toggleLogin() {
+    setLogin(!loggedIn);
+    if (loggedIn === false) localStorage.removeItem('jwt');
   }
+
+  /*
   useEffect(() => {
     // Update component when appNotes changes length or loggedIn switches.
   }, [appNotes.length, loggedIn])
-  
+  */
+ 
   return (
     <Container>
       <Router>
@@ -68,21 +72,21 @@ function App() {
             </Route>
             <Route exact path="/notes">
               { jwt ? 
-                <ListNotes notes={appNotes}/> 
+                <ListNotes notes={appNotes} loggedIn={loggedIn}/> 
                 :
                 <Redirect to="/" />
               }
             </Route>
             <Route exact path="/registration">
               { !jwt ?
-                <Registration />
+                <Registration loggedIn={loggedIn} toggleLogin={toggleLogin}/>
               :
                 <Redirect to="/listNotes" />
               }
             </Route>
             <Route exact path="/login">
               { !jwt ?
-                <Login />
+                <Login loggedIn={loggedIn} toggleLogin={toggleLogin}/>
               :
                 <Redirect to="/listNotes" />
               }
