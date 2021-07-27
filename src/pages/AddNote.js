@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 
-import toggleDisableChildElements from '../../helpers/toggleDisableChildElements';
+import toggleDisableChildElements from '../helpers/toggleDisableChildElements';
 
 function AddNote(props) {
     let setAppNotes = props.setAppNotes;
