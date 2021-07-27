@@ -13,7 +13,7 @@ import AddNote from './pages/AddNote';
 import ListNotes from './pages/ListNotes';
 import Registration from './pages/Registration';
 import Login from './pages/Login';
-
+import ViewNote from './pages/ViewNote';
 import './App.css';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
     // Update component when appNotes changes length or loggedIn switches.
   }, [appNotes.length, loggedIn])
   */
- 
+
   return (
     <Container>
       <Router>
@@ -72,7 +72,14 @@ function App() {
             </Route>
             <Route exact path="/notes">
               { jwt ? 
-                <ListNotes notes={appNotes} loggedIn={loggedIn}/> 
+                <ListNotes notes={appNotes} setNotes={setAppNotes} loggedIn={loggedIn}/> 
+                :
+                <Redirect to="/" />
+              }
+            </Route>
+            <Route exact path="/notes/:id">
+              { jwt ? 
+                <ViewNote notes={appNotes} loggedIn={loggedIn}/> 
                 :
                 <Redirect to="/" />
               }
