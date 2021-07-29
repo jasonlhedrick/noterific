@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -16,21 +16,32 @@ import Login from './pages/Login';
 import ViewNote from './pages/ViewNote';
 import './App.css';
 
+import axios from 'axios';
+import { serverLoc } from './constants';
+
 function App() {
   const [appNotes, setAppNotes] = useState([]);
   const [loggedIn, setLogin] = useState([false]);
   const jwt = localStorage.getItem('jwt');
-  
+ 
   function toggleLogin() {
     setLogin(!loggedIn);
     if (loggedIn === false) localStorage.removeItem('jwt');
   }
 
-  /*
   useEffect(() => {
-    // Update component when appNotes changes length or loggedIn switches.
-  }, [appNotes.length, loggedIn])
-  */
+    async function getNotes() {
+      const response = await axios.get(`${serverLoc}/notes/`, {
+          headers: {
+              authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
+      })
+      console.log(await response);
+      setAppNotes(await response.data.notes);
+    }
+    getNotes();
+
+  },[]);
 
   return (
     <Container>
@@ -72,7 +83,7 @@ function App() {
             </Route>
             <Route exact path="/notes">
               { jwt ? 
-                <ListNotes notes={appNotes} setNotes={setAppNotes} loggedIn={loggedIn}/> 
+                <ListNotes appNotes={appNotes} setAppNotes={setAppNotes} loggedIn={loggedIn}/> 
                 :
                 <Redirect to="/" />
               }
