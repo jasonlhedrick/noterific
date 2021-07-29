@@ -23,7 +23,10 @@ function App() {
   const [appNotes, setAppNotes] = useState([]);
   const [loggedIn, setLogin] = useState([false]);
   const jwt = localStorage.getItem('jwt');
- 
+  if (jwt) {
+    console.log(true);
+  }
+
   function toggleLogin() {
     setLogin(!loggedIn);
     if (loggedIn === false) localStorage.removeItem('jwt');
@@ -39,9 +42,9 @@ function App() {
       console.log(await response);
       setAppNotes(await response.data.notes);
     }
-    getNotes();
+    if (jwt) getNotes();
 
-  },[]);
+  },[jwt]);
 
   return (
     <Container>
@@ -99,14 +102,14 @@ function App() {
               { !jwt ?
                 <Registration loggedIn={loggedIn} toggleLogin={toggleLogin}/>
               :
-                <Redirect to="/listNotes" />
+                <Redirect to="/notes" />
               }
             </Route>
             <Route exact path="/login">
               { !jwt ?
                 <Login loggedIn={loggedIn} toggleLogin={toggleLogin}/>
               :
-                <Redirect to="/listNotes" />
+                <Redirect to="/notes" />
               }
             </Route>
           </Switch>
