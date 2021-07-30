@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 const axios = require('axios');
 const { serverLoc } = require('../constants');

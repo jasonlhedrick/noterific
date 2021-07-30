@@ -10,6 +10,7 @@ function Registration(props) {
     const [email, setEmail] = useState('');
     const registrationButton = document.getElementsByClassName('registration-button');
     registrationButton.disabled = true;
+    
     function registerAccount(e) {
         e.preventDefault();
         axios.post(`${serverLoc}/registration`, {email: email, password: password})
