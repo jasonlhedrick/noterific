@@ -23,28 +23,27 @@ function App() {
   const [appNotes, setAppNotes] = useState([]);
   const [loggedIn, setLogin] = useState([false]);
   const jwt = localStorage.getItem('jwt');
-  if (jwt) {
-    console.log(true);
-  }
 
+  useEffect(() => {
+    async function getNotes() {
+      try {
+        const response = await axios.get(`${serverLoc}/notes/`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('jwt')}`
+          }
+        })
+        setAppNotes(await response.data.notes);
+      } catch(err) {
+        console.error(err);
+      }
+    }
+    if (jwt) getNotes();
+  },[jwt]);
+  
   function toggleLogin() {
     setLogin(!loggedIn);
     if (loggedIn === false) localStorage.removeItem('jwt');
   }
-
-  useEffect(() => {
-    async function getNotes() {
-      const response = await axios.get(`${serverLoc}/notes/`, {
-          headers: {
-              authorization: `Bearer ${localStorage.getItem('jwt')}`
-          }
-      })
-      console.log(await response);
-      setAppNotes(await response.data.notes);
-    }
-    if (jwt) getNotes();
-
-  },[jwt]);
 
   return (
     <Container>
