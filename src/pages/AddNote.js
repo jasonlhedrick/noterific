@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
+import { serverLoc } from '../constants';
 
 import toggleDisableChildElements from '../helpers/toggleDisableChildElements';
 
@@ -8,16 +10,34 @@ function AddNote(props) {
     const [noteTitle, setNoteTitle] = useState('');
     const [noteBody, setNoteBody] = useState('');
   
-    function submitNewNote(e) {
-      e.preventDefault();
+    async function submitNewNote(e) {
       const addNoteFormFieldset = document.getElementById('addNoteFormFieldset');
-      toggleDisableChildElements(addNoteFormFieldset);
-      /* Database functionality. */
-      
-      
-      /* For testing functionality without a database. */
-      setAppNotes(appNotes => [...appNotes, {title: noteTitle, body: noteBody}]);
-      toggleDisableChildElements(addNoteFormFieldset);
+      try {
+        e.preventDefault();
+        toggleDisableChildElements(addNoteFormFieldset);
+        /* Database functionality. */
+        await axios.post(`${serverLoc}/notes/`, {title:  noteTitle, body:  noteBody}, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          }
+        });
+        const updatedNotes = await axios.get(`${serverLoc}/notes/`, {
+          headers: {
+            authorization: `Bearer ${localStorage.getItem('jwt')}`,
+          }
+        });
+        if (await updatedNotes.data.notes) {
+          setAppNotes(await updatedNotes.data.notes);
+          // Clear out the note values if the note properly posted.
+          document.getElementById('addNoteTitle').value = '';
+          document.getElementById('addNoteBody').value = '';
+          toggleDisableChildElements(addNoteFormFieldset);
+        }
+        toggleDisableChildElements(addNoteFormFieldset);
+      } catch(err) {
+        toggleDisableChildElements(addNoteFormFieldset);
+        console.error(err);
+      }
     }
   
     return (

@@ -24,7 +24,7 @@ function ListNotes(props) {
   }
   
   return (
-      <div id="listNotes">
+      <div className="listNotes">
         {props.appNotes ? 
         props.appNotes.map(note => {
           return (

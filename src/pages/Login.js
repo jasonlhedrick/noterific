@@ -12,7 +12,6 @@ function Login(props) {
         event.preventDefault();
         axios.post(`${serverLoc}/login`, {email: email, password: password})
         .then(res => {
-            console.log(res);
             localStorage.setItem('jwt', res.data.token);
             props.toggleLogin()
         })
