@@ -1,4 +1,4 @@
-const serverLoc = 'http://localhost:4000';
+const serverLoc = 'https://hidden-coast-83531.herokuapp.com';
 
 module.exports = {
     serverLoc,
