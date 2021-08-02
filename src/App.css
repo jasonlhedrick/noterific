@@ -81,7 +81,7 @@ form button {
 
 .list-note-card {
   margin: 3% 0 3% 0;
-  border: 3px solid grey;
+  min-height: 80%;
 }
 
 .listNotes {
@@ -92,13 +92,11 @@ form button {
 .listNoteCardContainer {
   background-color: white;
   border: 2px solid black;
-  width: 400px;
+  width: 350px;
   display: flex;
   flex-direction: column;
-}
-
-.btn-removeNote {
-  display: inline;
+  justify-content: center;
+  align-items: center;
 }
 
 /*# sourceMappingURL=App.css.map */

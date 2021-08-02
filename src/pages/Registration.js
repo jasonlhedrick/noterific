@@ -15,14 +15,12 @@ function Registration(props) {
         e.preventDefault();
         axios.post(`${serverLoc}/registration`, {email: email, password: password})
         .then(res => {
-            console.log(res);
             localStorage.setItem('jwt', res.data.token);
             props.toggleLogin();
             return res;
         })
         .catch(err => {
-            console.error(err);
-            console.log(err.response);
+            console.error(err.response);
             return err.response;
         });
     }
