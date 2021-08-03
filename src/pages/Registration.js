@@ -34,7 +34,7 @@ function Registration(props) {
                     <input required type="email" id="registration-form-email" name="email" onChange={(e) => setEmail(e.target.value)}></input>
                     <label htmlFor="password">Password</label>
                     <input required type="text" id="registration-form-password" name="password" onChange={(e) => setPassword(e.target.value)}></input>
-                    <Button class="registration-button" type="submit">Register</Button>
+                    <Button className="registration-button" type="submit">Register</Button>
                 </fieldset>
             </form>
             {/* TODO: Add oAuth 2.0 Registration */}

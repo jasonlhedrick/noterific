@@ -65,8 +65,12 @@ form
     margin-top: 3%
     margin-bottom: 3%
     display: flex
-    justify-content: space-around
+    flex-direction: column
     font-size: var(--defaultFontSize)
+    align-items: center
+    button 
+        width: 100px
+
 
 .list-note-card 
   margin: 3% 0 3% 0
@@ -76,7 +80,7 @@ form
 .listNotes 
   display: flex
   flex-direction: row
-
+  flex-wrap: wrap
 
 .listNoteCardContainer 
   background-color: white
@@ -86,3 +90,12 @@ form
   flex-direction: column
   justify-content: center
   align-items: center
+
+
+@media only screen and (min-width: 600px)
+    .main-nav
+        display: flex
+        flex-direction: row
+        justify-content: space-around
+
+    
