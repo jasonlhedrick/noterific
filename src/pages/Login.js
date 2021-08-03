@@ -24,7 +24,7 @@ function Login(props) {
         <form id="login-form" onSubmit={handleLogin}>
             <fieldset id="login-form-fieldset">
                 <legend>Login to your account.</legend>
-                <label htmlFor="email">Username</label>
+                <label htmlFor="email">Email</label>
                 <input required type="text" id="login-form-email" name="email" autoComplete="current-email"
                 onChange={(e) => setEmail(e.target.value)}></input>
                 <label htmlFor="password">Password</label>
