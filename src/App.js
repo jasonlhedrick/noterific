@@ -42,7 +42,6 @@ function App() {
   
   function toggleLogin() {
     setLogin(!loggedIn);
-    if (loggedIn === false) localStorage.removeItem('jwt');
   }
 
   return (
