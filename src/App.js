@@ -91,7 +91,7 @@ function App() {
             </Route>
             <Route exact path="/notes/:id">
               { jwt ? 
-                <ViewNote notes={appNotes} loggedIn={loggedIn}/> 
+                <ViewNote appNotes={appNotes} setAppNotes={setAppNotes} loggedIn={loggedIn}/> 
                 :
                 <Redirect to="/" />
               }
