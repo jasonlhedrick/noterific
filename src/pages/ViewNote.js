@@ -16,7 +16,7 @@ function ViewNote(props) {
     async function updateNote(e) {
         e.preventDefault();
         try {
-            const response = await axios.put(`${serverLoc}/notes/${id}`, {title: noteTitle, body: noteBody}, {
+            await axios.put(`${serverLoc}/notes/${id}`, {title: noteTitle, body: noteBody}, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('jwt')}`,
                   }
